@@ -5,6 +5,7 @@ using pruebaConexionPostgreSQLV.Models;
 using pruebaConexionPostgreSQLV.Util;
 using System.Diagnostics;
 using System.Reflection.PortableExecutable;
+using pruebaConexionPostgreSQLV.Models.DTOs;
 
 namespace pruebaConexionPostgreSQLV.Controllers
 {
@@ -27,7 +28,8 @@ namespace pruebaConexionPostgreSQLV.Controllers
             const string USER = VariablesConexionPostgreSQL.USER;
             const string PASS = VariablesConexionPostgreSQL.PASS;
             const string DB = VariablesConexionPostgreSQL.DB;
-            
+            List<AlumnoDTO> listaAlumno = new List<AlumnoDTO>();
+
             //Se genera una conexión a PostgreSQL y validamos que esté abierta fuera del método
             var estadoGenerada = "";
             NpgsqlConnection conexionGenerada = new NpgsqlConnection();
@@ -40,16 +42,18 @@ namespace pruebaConexionPostgreSQLV.Controllers
             try
             {
 
-                consulta = new NpgsqlCommand("SELECT * FROM \"proyectoEclipse\".\"alumnos\"", conexionGenerada);
+                consulta = new NpgsqlCommand("SELECT * FROM \"proyectoEclipse\".\"Alumnos\"", conexionGenerada);
                 NpgsqlDataReader resultadoConsulta = consulta.ExecuteReader();
                 while (resultadoConsulta.Read())
                 {
                    
                         Console.Write("{0}\t{1}\t{2}\t{3} \n", 
                             resultadoConsulta[0], resultadoConsulta[1], resultadoConsulta[2], resultadoConsulta[3]);
-                    
-                }
 
+                    listaAlumno.Add( new AlumnoDTO(Convert.ToInt32(resultadoConsulta[0]), resultadoConsulta[1].ToString(),
+                        resultadoConsulta[2].ToString(), resultadoConsulta[3].ToString()));
+                }
+                
                 System.Console.WriteLine("[INFORMACIÓN-HomeController-Index] Cierre conexión y conjunto de datos");
                 conexionGenerada.Close();
                 resultadoConsulta.Close();
