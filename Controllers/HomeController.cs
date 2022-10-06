@@ -45,7 +45,7 @@ namespace pruebaConexionPostgreSQLV.Controllers
                 consulta = new NpgsqlCommand("SELECT * FROM \"proyectoEclipse\".\"Alumnos\"", conexionGenerada);
                 NpgsqlDataReader resultadoConsulta = consulta.ExecuteReader();
                 while (resultadoConsulta.Read())
-                {
+                {   
                    
                         Console.Write("{0}\t{1}\t{2}\t{3} \n", 
                             resultadoConsulta[0], resultadoConsulta[1], resultadoConsulta[2], resultadoConsulta[3]);
