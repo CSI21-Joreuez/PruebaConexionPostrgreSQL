@@ -10,7 +10,7 @@ namespace pruebaConexionPostgreSQLV.Util
     {
         //Datos de conexión a PostgreSQL
        public const string USER = "postgres";
-       public const string PASS = "Ore-2002";
+       public const string PASS = "password";
        public const string PORT = "5432";
        public const string HOST = "localhost";
        public const string DB = "Ejemploinicial";
